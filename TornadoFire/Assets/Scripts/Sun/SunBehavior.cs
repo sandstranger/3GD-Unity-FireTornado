@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SunBehavior : MonoBehaviour
 {
-    [SerializeField] private Vector3 forward = Vector3.zero;    
+    [SerializeField] private float angle = 18.0f;
 
     private void Update()
     {
-        this.forward = this.transform.forward;
-        this.transform.Rotate(Vector3.right, 18.0f * Time.deltaTime);
+        //Do a barrelroll !!!
+        this.transform.Rotate(Vector3.right, this.angle * Time.deltaTime);
     }
 }

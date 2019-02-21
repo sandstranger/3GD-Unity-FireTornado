@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TornadoController : MonoBehaviour
 {
@@ -29,6 +28,10 @@ public class TornadoController : MonoBehaviour
         this.tornado.position += this.direction * this.speed * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Set the direction of the current tornado.
+    /// </summary>
+    /// <param name="direction">The direction.</param>
     public void SetDirection(Vector3 direction)
     {
         if (direction == Vector3.zero)
@@ -39,6 +42,9 @@ public class TornadoController : MonoBehaviour
         this.direction = direction.normalized;
     }
 
+    /// <summary>
+    /// Get the next tornado in the array.
+    /// </summary>
     public void GetNextTornado()
     {
         this.tornado.GetComponent<TornadoShader>().UpdateSelected(false);

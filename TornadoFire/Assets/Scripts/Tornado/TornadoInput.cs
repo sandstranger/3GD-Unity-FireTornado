@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TornadoInput : MonoBehaviour
 {
@@ -11,8 +10,10 @@ public class TornadoInput : MonoBehaviour
     #region Methods
     public void CustomUpdate()
     {
+        //Update Tornado Direction
         this.controller.SetDirection(new Vector3(Input.GetAxis(InputNames.Horizontal), 0, Input.GetAxis(InputNames.Vertical)));
 
+        //Get the next Tornado
         if(Input.GetKeyDown(KeyCode.Space))
         {
             this.controller.GetNextTornado();
