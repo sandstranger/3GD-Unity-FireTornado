@@ -16,6 +16,12 @@
 
 		_Noise ("_Noise", 2D) = "white" {}
 		_MainTex ("Texture", 2D) = "white" {}
+
+		//Fresnel Effect
+		_FresnelBias("_FresnelBias", Float) = 1
+		_FresnelScale("_FresnelScale", Float) = 1
+		_FresnelPower("_FresnelPower", Float) = 1
+		_FresnelColor ("_FresnelColor", Color) = (1,1,1,1)
 	}
 
 	SubShader
@@ -74,6 +80,12 @@
 			uniform float _WaveSpeed;
 			uniform float _NumberOfWaves;
 			uniform float3 _WaveMultiplicator;
+
+			//Fresnel Effect
+			uniform float _FresnelBias;
+			uniform float _FresnelScale;
+			uniform float _FresnelPower;
+			uniform float4 _FresnelColor;
 			
 			v2f vert (appdata v)
 			{
@@ -91,7 +103,6 @@
 				float3 res6 = v.normal * res5;
 				res6 *= _WaveMultiplicator;
 				float3 result = v.vertex + res6;
-
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(result);
@@ -121,6 +132,14 @@
 				//tex.a = alphaClipThreshold - alphaTex;
 				clip(_Alpha - alphaTex);
 				tex.rgb *= _Color.rgb;
+
+				//Fresnel Effect
+				float3 worldSpaceNormal = normalize(mul(i.normal, unity_ObjectToWorld));
+                float3 worldSpaceViewDirection = _WorldSpaceCameraPos.xyz - mul(float4(i.vertex.xyz, 1.0), unity_ObjectToWorld).xyz;
+
+				float4 fresnelReflection = _FresnelBias + _FresnelScale * pow(1.0 - saturate(dot(normalize(worldSpaceViewDirection), normalize(i.normal))), _FresnelPower);
+
+				tex = fresnelReflection; //lerp(tex,_FresnelColor,fresnelReflection);
 
 				return tex;
 			}
