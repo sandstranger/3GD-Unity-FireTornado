@@ -3,7 +3,7 @@
 	Properties
 	{
   		_TextureSpeed("_TextureSpeed", Vector) = (1,1,1,1)
-		_TextureTiling("_TextureTiling", Vector) = (1,1,1,1)
+		_Tiling("_Tiling", Vector) = (1,1,1,1)
 		_Color ("_Color", Color) = (1,1,1,1)
 
 
@@ -134,12 +134,12 @@
 				tex.rgb *= _Color.rgb;
 
 				//Fresnel Effect
-				float3 worldSpaceNormal = normalize(mul(i.normal, unity_ObjectToWorld));
-                float3 worldSpaceViewDirection = _WorldSpaceCameraPos.xyz - mul(float4(i.vertex.xyz, 1.0), unity_ObjectToWorld).xyz;
+				//float3 worldSpaceNormal = normalize(mul(i.normal, unity_ObjectToWorld));
+				//float3 worldSpaceViewDirection = _WorldSpaceCameraPos.xyz - mul(float4(i.vertex.xyz, 1.0), unity_ObjectToWorld).xyz;
 
-				float4 fresnelReflection = _FresnelBias + _FresnelScale * pow(1.0 - saturate(dot(normalize(worldSpaceViewDirection), normalize(i.normal))), _FresnelPower);
+				//float4 fresnelReflection = _FresnelBias + _FresnelScale * pow(1.0 - saturate(dot(normalize(worldSpaceViewDirection), normalize(i.normal))), _FresnelPower);
 
-				tex = fresnelReflection; //lerp(tex,_FresnelColor,fresnelReflection);
+				//tex = fresnelReflection; //lerp(tex,_FresnelColor,fresnelReflection);
 
 				return tex;
 			}
