@@ -39,7 +39,7 @@
 			#pragma multi_compile_fog
 			
 			#include "UnityCG.cginc"
-			#include "Assets\[Tools]\Shaders\Include\snoise.cginc"
+			#include "Assets\Plugins\SubModules\Tornado\3GDB_Unity_FireTornadoTP_BenjaminPETER\Assets\[Tools]\Shaders\Include\snoise.cginc"
 
 			struct appdata
 			{
